@@ -1,0 +1,5 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AgentBrake">
+  <path d="M11 2H21L30 11V21L21 30H11L2 21V11Z" fill="#16a34a"/>
+  <path d="M12.5 5.7H19.5L26.3 12.5V19.5L19.5 26.3H12.5L5.7 19.5V12.5Z" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.45"/>
+  <rect x="8.5" y="14.1" width="15" height="3.8" rx="1.9" fill="#ffffff"/>
+</svg>

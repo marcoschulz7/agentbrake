@@ -151,7 +151,7 @@ FOOTER = f"""<footer class="site"><div class="wrap">
     <div>
       <h4>AgentBrake</h4>
       <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
-      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time, free and source-available.</p>
     </div>
     <div><h4>Product</h4>
       <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
@@ -165,7 +165,7 @@ FOOTER = f"""<footer class="site"><div class="wrap">
       <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
       <a href="{GITHUB}" rel="noopener">GitHub</a></div>
   </div>
-  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+  <div class="fbottom">© 2026 AgentBrake · FSL-1.1-MIT ·
     <a href="{GITHUB}" rel="noopener">GitHub</a> ·
     <a href="{PYPI}" rel="noopener">PyPI</a> · <code>{PIP}</code></div>
 </div></footer>"""
@@ -229,7 +229,7 @@ def software_ld():
             'that stops runaway LangChain and CrewAI agents before they cause cost '
             'blowouts.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},'
             f'"softwareVersion":"0.1.1","url":"{SITE}","downloadUrl":"{PYPI}",'
-            '"license":"https://opensource.org/licenses/MIT"}')
+            '"license":"https://github.com/marcoschulz7/agentbrake/blob/main/LICENSE"}')
 
 
 def faq_ld(qa):
@@ -307,7 +307,7 @@ def codeblock(code):
 def build_home():
     qa = [
         ("What is AgentBrake?",
-         "AgentBrake is an open-source Python package that stops runaway LangChain and "
+         "AgentBrake is a free, source-available Python package that stops runaway LangChain and "
          "CrewAI agents in real time. You set limits — cost ceiling, identical-tool-loop "
          "detection, max steps, tool calls, and duration — and it halts the run before "
          "the next expensive call goes out."),
@@ -321,7 +321,7 @@ def build_home():
          "stop it. On CrewAI 1.x it patches the provider call path and uses a "
          "BaseException so the framework's retry loop can't swallow the brake."),
         ("Is AgentBrake free?",
-         "Yes, it is MIT licensed and free for any use, including commercial. Install it "
+         "Yes, it is free to use and source-available under the FSL (non-compete; converts to MIT after two years). Install it "
          "with pip install agentbrake-sdk."),
         ("How much code does it take?",
          "One line. You add the middleware (LangChain) or call .install() (CrewAI). No "
@@ -329,7 +329,7 @@ def build_home():
     ]
     body = f"""
 <section class="hero"><div class="wrap">
-  <span class="eyebrow">Open source · LangChain &amp; CrewAI</span>
+  <span class="eyebrow">Free, source available · LangChain &amp; CrewAI</span>
   <h1>Stop runaway AI agents before they burn your budget.</h1>
   <p class="lead">AgentBrake is the emergency brake for LangChain &amp; CrewAI. One line of
   code stops infinite loops, cost blowouts, and endless reasoning — in real time,
@@ -341,7 +341,7 @@ def build_home():
     </div>
     <a class="btn btn-ghost" href="{GITHUB}" rel="noopener">Star on GitHub</a>
   </div>
-  <p class="hero-note">Imports as <code class="mono">agentbrake</code>. MIT licensed.
+  <p class="hero-note">Imports as <code class="mono">agentbrake</code>. Free, source-available (FSL).
   Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
   <figure>
     <img src="/agentbrake.gif" width="1278" height="484" loading="eager"
@@ -409,7 +409,7 @@ def build_home():
     page(path="", title="AgentBrake — Stop runaway LangChain & CrewAI agents",
          description="Open-source emergency brake for AI agents. Stop runaway LangChain "
                      "& CrewAI loops and cost blowouts in real time, before the next "
-                     "expensive call. One line of code, MIT licensed.",
+                     "expensive call. One line of code, Free, source-available (FSL).",
          body=body, jsonld=[org_ld(), software_ld(), faq_ld(qa)])
 
 
@@ -446,7 +446,7 @@ def build_framework(slug, name, code, patterns, intro, qa):
          title=f"Stop runaway {name} agents — AgentBrake",
          description=f"Add a real-time brake to your {name} agents. AgentBrake halts "
                      f"loops, cost blowouts and endless reasoning before the next call. "
-                     f"One line, open source.",
+                     f"One line, free to use.",
          body=body, jsonld=[software_ld(), faq_ld(qa), breadcrumb_ld(
              [("Home", SITE + "/"), (name, SITE + "/" + slug + "/")])])
 
@@ -575,7 +575,7 @@ def build_all():
         ("Records / traces runs", '<span class="muted">Basic live stats</span>', '<span class="yes">Yes — its core strength</span>'),
         ("Identical-loop detection that halts", '<span class="yes">Yes</span>', '<span class="no">Observe only</span>'),
         ("Hard per-run cost ceiling that halts", '<span class="yes">Yes</span>', '<span class="no">Alerts, not stops</span>'),
-        ("Open source (MIT)", '<span class="yes">Yes</span>', "Varies"),
+        ("Free, source-available (FSL)", '<span class="yes">Yes</span>', "Varies"),
         ("Setup", '<span class="yes">One line, no proxy</span>', "SDK / proxy / dashboard"),
         ("Frameworks", "LangChain 1.x &amp; 0.x, CrewAI 1.x", "Many"),
     ]
@@ -763,8 +763,8 @@ def emit_assets():
     # llms.txt — context file for AI systems (llmstxt.org)
     w("llms.txt", f"""# AgentBrake
 
-> The emergency brake for multi-agent systems. AgentBrake is an open-source
-> (MIT) Python package that stops runaway LangChain and CrewAI agents in real
+> The emergency brake for multi-agent systems. AgentBrake is a free, source-available
+> Python package that stops runaway LangChain and CrewAI agents in real
 > time — before infinite loops or cost blowouts burn your budget. Install:
 > `pip install agentbrake-sdk` (imports as `agentbrake`).
 
@@ -795,11 +795,11 @@ def emit_assets():
     # pricing.md — machine-readable for AI buying agents
     w("pricing.md", f"""# Pricing — AgentBrake
 
-AgentBrake is free and open source (MIT).
+AgentBrake is free to use and source-available (FSL).
 
 ## Open Source
 - Price: /forever
-- License: MIT (commercial use allowed)
+- License: FSL-1.1-MIT (free use, no competing resale; becomes MIT after 2 years)
 - Install: `pip install agentbrake-sdk`
 - Features: real-time loop detection, per-run cost ceiling, step/tool/duration
   limits, LangChain (1.x + 0.x) and CrewAI (1.x) support.

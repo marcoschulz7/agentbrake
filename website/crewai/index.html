@@ -4,23 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stop runaway CrewAI agents — AgentBrake</title>
-<meta name="description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, open source.">
+<meta name="description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, free to use.">
 <link rel="canonical" href="https://agentbrake.dev/crewai/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Stop runaway CrewAI agents — AgentBrake">
-<meta property="og:description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, open source.">
+<meta property="og:description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, free to use.">
 <meta property="og:url" content="https://agentbrake.dev/crewai/">
 <meta property="og:image" content="https://agentbrake.dev/og.png">
 <meta property="og:site_name" content="AgentBrake">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Stop runaway CrewAI agents — AgentBrake">
-<meta name="twitter:description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, open source.">
+<meta name="twitter:description" content="Add a real-time brake to your CrewAI agents. AgentBrake halts loops, cost blowouts and endless reasoning before the next call. One line, free to use.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AgentBrake","applicationCategory":"DeveloperApplication","operatingSystem":"Python 3.9+","description":"Real-time emergency brake that stops runaway LangChain and CrewAI agents before they cause cost blowouts.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"0.1.1","url":"https://agentbrake.dev","downloadUrl":"https://pypi.org/project/agentbrake-sdk/","license":"https://opensource.org/licenses/MIT"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AgentBrake","applicationCategory":"DeveloperApplication","operatingSystem":"Python 3.9+","description":"Real-time emergency brake that stops runaway LangChain and CrewAI agents before they cause cost blowouts.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"0.1.1","url":"https://agentbrake.dev","downloadUrl":"https://pypi.org/project/agentbrake-sdk/","license":"https://github.com/marcoschulz7/agentbrake/blob/main/LICENSE"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the brake really stop a CrewAI crew?","acceptedAnswer":{"@type":"Answer","text":"Yes. A live run on real OpenAI confirmed it halts crew.kickoff(). CrewAI's retry loop used to swallow the brake; AgentBrakeError is now a BaseException, so it can't be caught by the framework's except Exception."}},{"@type":"Question","name":"When do I call install()?","acceptedAnswer":{"@type":"Answer","text":"Right before crew.kickoff(), after your agents and LLMs are constructed — CrewAI lazy-loads provider classes, so installing late guarantees they're patched."}},{"@type":"Question","name":"How accurate is the cost ceiling?","acceptedAnswer":{"@type":"Answer","text":"It reads real token usage the provider reports. Loop, step, tool-call and duration limits are exact regardless."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agentbrake.dev/"},{"@type":"ListItem","position":2,"name":"CrewAI","item":"https://agentbrake.dev/crewai/"}]}</script>
 </head>
@@ -78,7 +78,7 @@
     <div>
       <h4>AgentBrake</h4>
       <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
-      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time, free and source-available.</p>
     </div>
     <div><h4>Product</h4>
       <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
@@ -92,7 +92,7 @@
       <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
       <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a></div>
   </div>
-  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+  <div class="fbottom">© 2026 AgentBrake · FSL-1.1-MIT ·
     <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a> ·
     <a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a> · <code>pip install agentbrake-sdk</code></div>
 </div></footer>

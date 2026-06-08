@@ -25,7 +25,7 @@ const jsonLd = {
       softwareVersion: "0.1.1",
       url: SITE,
       downloadUrl: PYPI,
-      license: "https://opensource.org/licenses/MIT",
+      license: "https://github.com/marcoschulz7/agentbrake/blob/main/LICENSE",
     },
     {
       "@type": "FAQPage",
@@ -59,7 +59,7 @@ const jsonLd = {
           name: "How much code does it take?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account. It is MIT licensed and free.",
+            text: "One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account. It is free to use and source-available (FSL).",
           },
         },
       ],

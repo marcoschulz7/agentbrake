@@ -11,8 +11,30 @@ import {
   Check,
   Copy,
   ArrowRight,
+  Lock,
+  Gauge,
+  Cpu,
 } from "lucide-react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+
+function BrakeMark({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
+      <path
+        d="M11 2H21L30 11V21L21 30H11L2 21V11Z"
+        fill="currentColor"
+      />
+      <path
+        d="M12.5 5.7H19.5L26.3 12.5V19.5L19.5 26.3H12.5L5.7 19.5V12.5Z"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="1.4"
+        opacity="0.45"
+      />
+      <rect x="8.5" y="14.1" width="15" height="3.8" rx="1.9" fill="#ffffff" />
+    </svg>
+  );
+}
 
 function GitHubIcon({ className = "" }: { className?: string }) {
   return (
@@ -92,11 +114,11 @@ const CATCHES = [
 const FAQ = [
   {
     q: "What is AgentBrake?",
-    a: "AgentBrake is an open-source Python package that stops runaway LangChain and CrewAI agents in real time. You set limits — cost ceiling, identical-tool-loop detection, max steps, tool calls, and duration — and it halts the run before the next expensive call goes out.",
+    a: "AgentBrake is an open-source Python package that stops runaway LangChain and CrewAI agents in real time. You set limits, cost ceiling, identical-tool-loop detection, max steps, tool calls, and duration, and it halts the run before the next expensive call goes out.",
   },
   {
     q: "How is it different from observability tools?",
-    a: "Observability tools like Langfuse, Helicone, and LangSmith record what an agent did. AgentBrake intercepts and stops it. It runs in-process and per-run, so it halts this agent now — not after the bill arrives.",
+    a: "Observability tools like Langfuse, Helicone, and LangSmith record what an agent did. AgentBrake intercepts and stops it. It runs in-process and per-run, so it halts this agent now, not after the bill arrives.",
   },
   {
     q: "Does it work with LangChain 1.x and CrewAI 1.x?",
@@ -104,7 +126,7 @@ const FAQ = [
   },
   {
     q: "How much code does it take?",
-    a: "One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account. It's MIT licensed and free.",
+    a: "One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account. It's free to use and source-available (FSL).",
   },
 ];
 
@@ -122,9 +144,7 @@ export default function Landing() {
       <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-white/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <a href="/" className="flex items-center gap-2.5 font-semibold">
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-green-600 text-white">
-              <span className="h-2.5 w-2.5 rounded-sm bg-white" />
-            </span>
+            <BrakeMark className="h-7 w-7 text-green-600" />
             AgentBrake
           </a>
           <nav className="flex items-center gap-7 text-sm text-slate-600">
@@ -158,7 +178,7 @@ export default function Landing() {
             className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center"
           >
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-green-700">
-              Open source · MIT · LangChain &amp; CrewAI
+              Free, source available · Private by design · LangChain &amp; CrewAI
             </span>
             <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-6xl">
               Stop runaway AI agents before they burn your budget.
@@ -166,7 +186,7 @@ export default function Landing() {
             <p className="mt-6 max-w-xl text-pretty text-lg text-slate-600">
               AgentBrake is the emergency brake for LangChain &amp; CrewAI. One
               line of code stops infinite loops, cost blowouts and endless
-              reasoning — in real time, before the next expensive call goes out.
+              reasoning, in real time, before the next expensive call goes out.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
               <CopyInstall />
@@ -201,7 +221,7 @@ export default function Landing() {
             />
           </motion.figure>
           <p className="mt-3 text-center text-sm text-slate-500">
-            A real LangGraph agent caught in a loop — stopped at step 3, before
+            A real LangGraph agent caught in a loop, stopped at step 3, before
             the bill grows.
           </p>
         </section>
@@ -221,7 +241,7 @@ export default function Landing() {
               This is not rare. An agent calls the same tool 14,000 times with
               identical arguments. A planner expands one task into dozens of
               subagent calls. A reasoning loop never terminates and runs all
-              night. Observability tools record it — they don&apos;t stop it. The
+              night. Observability tools record it, they don&apos;t stop it. The
               gap between &ldquo;the alert fired&rdquo; and &ldquo;the run
               stopped&rdquo; is exactly where the money goes.
             </p>
@@ -330,7 +350,7 @@ CrewAIBrake(
               className="flex flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6"
             >
               <p className="text-sm text-slate-600">
-                Provider spend caps are monthly and account-wide — they fire
+                Provider spend caps are monthly and account-wide, they fire
                 after the damage. AgentBrake is{" "}
                 <strong className="text-slate-900">per-run and in-process</strong>
                 : it stops this agent now.
@@ -342,8 +362,71 @@ CrewAIBrake(
           </div>
         </section>
 
+        {/* Privacy & latency */}
+        <section className="border-t border-slate-100 bg-slate-50/60">
+          <div className="mx-auto max-w-6xl px-6 py-24">
+            <motion.div {...fade} className="max-w-2xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+                In-process by design. Private and fast.
+              </h2>
+              <p className="mt-4 text-slate-600">
+                AgentBrake runs inside your process as a library. No proxy, no
+                gateway. Your prompts and data never leave your environment, and
+                the brake adds microseconds, not a network round-trip.
+              </p>
+            </motion.div>
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              <motion.div
+                {...fade}
+                className="rounded-2xl border border-slate-200 bg-white p-6"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-green-50 text-green-600">
+                  <Lock className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                  Privacy by design
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Your prompts, completions and tokens stay in your process.
+                  Nothing is sent to a third party, so there is nothing to leak.
+                </p>
+              </motion.div>
+              <motion.div
+                {...fade}
+                className="rounded-2xl border border-slate-200 bg-white p-6"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-green-50 text-green-600">
+                  <Gauge className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                  ~3&nbsp;microseconds per step
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Measured overhead per agent step, with no network call in the
+                  hot path. Over 300,000 steps per second on a single core.
+                </p>
+              </motion.div>
+              <motion.div
+                {...fade}
+                className="rounded-2xl border border-slate-200 bg-white p-6"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-green-50 text-green-600">
+                  <Cpu className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                  No proxy in the path
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Proxy and gateway tools add a round-trip and see your traffic.
+                  AgentBrake is just a local library, so latency stays yours.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ */}
-        <section id="faq" className="border-t border-slate-100 bg-slate-50/60">
+        <section id="faq" className="bg-slate-50/60">
           <div className="mx-auto max-w-3xl px-6 py-24">
             <motion.h2
               {...fade}
@@ -369,14 +452,14 @@ CrewAIBrake(
         <section className="mx-auto max-w-4xl px-6 py-24">
           <motion.div
             {...fade}
-            className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-10 text-center shadow-sm"
+            className="rounded-3xl border border-slate-200 bg-linear-to-b from-white to-slate-50 p-10 text-center shadow-sm"
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">
               Stop your next runaway agent
             </h2>
             <p className="mx-auto mt-3 max-w-md text-slate-600">
-              One line of code. Open source. Works on LangChain 1.x, CrewAI 1.x,
-              and the classic AgentExecutor.
+              One line of code. Free and in-process. Works on LangChain 1.x,
+              CrewAI 1.x, and the classic AgentExecutor.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <CopyInstall />
@@ -396,9 +479,7 @@ CrewAIBrake(
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-slate-500 sm:flex-row">
           <div className="flex items-center gap-2.5 font-semibold text-slate-700">
-            <span className="grid h-6 w-6 place-items-center rounded-md bg-green-600 text-white">
-              <span className="h-2 w-2 rounded-sm bg-white" />
-            </span>
+            <BrakeMark className="h-6 w-6 text-green-600" />
             AgentBrake
           </div>
           <div className="flex items-center gap-6">
@@ -408,7 +489,7 @@ CrewAIBrake(
             <a className="hover:text-slate-900" href={PYPI} rel="noopener">
               PyPI
             </a>
-            <span>MIT License</span>
+            <span>FSL-1.1-MIT</span>
           </div>
         </div>
       </footer>

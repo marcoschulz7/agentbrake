@@ -1,7 +1,7 @@
 # AgentBrake
 
-> The emergency brake for multi-agent systems. AgentBrake is an open-source
-> (MIT) Python package that stops runaway LangChain and CrewAI agents in real
+> The emergency brake for multi-agent systems. AgentBrake is a free, source-available
+> Python package that stops runaway LangChain and CrewAI agents in real
 > time — before infinite loops or cost blowouts burn your budget. Install:
 > `pip install agentbrake-sdk` (imports as `agentbrake`).
 

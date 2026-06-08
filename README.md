@@ -123,11 +123,14 @@ except AgentBrakeError as e:
 Every run prints where your money is going, step by step:
 
 ```
-[AgentBrake] step 1: web_search · running cost $0.0080
-[AgentBrake] step 2: web_search · running cost $0.0160
-[AgentBrake] ⚠️  approaching cost limit (1.60 of 2.00)
-[AgentBrake] 🛑 STOPPED — loop detected: same tool call repeated 5× in a row
-  steps=5 tool_calls=5 llm_calls=4 tokens=9,200 cost=$0.032 elapsed=0.4s
+[AgentBrake] step 1: web_search · running cost $0.4000
+[AgentBrake] step 2: web_search · running cost $0.8000
+[AgentBrake] step 3: web_search · running cost $1.2000
+[AgentBrake] step 4: web_search · running cost $1.6000
+[AgentBrake] ⚠️  approaching cost limit (1.60 of 2.0)
+[AgentBrake] step 5: web_search · running cost $2.0000
+[AgentBrake] 🛑 STOPPED — cost ceiling reached ($2.00 ≥ $2.00)
+  steps=5 tool_calls=5 llm_calls=5 cost=$2.0000 elapsed=6.2s
 ```
 
 ---
@@ -146,4 +149,11 @@ Provider caps are **monthly** and **account-wide** — they fire after the damag
 
 ## License
 
-MIT — free to use, including commercially.
+[FSL-1.1-MIT](LICENSE) (Functional Source License). Free to use, modify and
+self-host for any purpose, **except** building a competing commercial product or
+service. Each release converts automatically to the MIT license two years after
+it ships. (Versions 0.1.0 and 0.1.1 were released under MIT and stay MIT.)
+
+Because AgentBrake runs **in-process** (no proxy, no gateway), your prompts and
+data never leave your environment, and the overhead is measured in microseconds.
+Privacy by design, near-zero added latency.

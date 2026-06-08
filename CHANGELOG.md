@@ -3,6 +3,19 @@
 All notable changes to AgentBrake are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.2.0]
+
+### Changed
+- **Relicensed to FSL-1.1-MIT** (Functional Source License). Free to use, modify
+  and self-host for any purpose except building a competing commercial product or
+  service; converts automatically to MIT two years after each release. Versions
+  0.1.0 and 0.1.1 remain MIT.
+
+### Added (docs / positioning)
+- Documented the in-process design as a first-class benefit: **privacy by design**
+  (prompts and data never leave your process, no proxy) and **near-zero latency**
+  (measured ~3 microseconds overhead per agent step, no network calls).
+
 ## [0.1.1]
 
 ### Fixed
