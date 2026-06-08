@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is a runaway agent loop? — definition & how to prevent it | AgentBrake</title>
+<meta name="description" content="A runaway agent loop is when an autonomous AI agent repeats actions — often the same tool call with identical arguments — without ever reaching its stoppin">
+<link rel="canonical" href="https://agentbrake.dev/glossary/runaway-agent-loop/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is a runaway agent loop? — definition & how to prevent it | AgentBrake">
+<meta property="og:description" content="A runaway agent loop is when an autonomous AI agent repeats actions — often the same tool call with identical arguments — without ever reaching its stoppin">
+<meta property="og:url" content="https://agentbrake.dev/glossary/runaway-agent-loop/">
+<meta property="og:image" content="https://agentbrake.dev/og.png">
+<meta property="og:site_name" content="AgentBrake">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What is a runaway agent loop? — definition & how to prevent it | AgentBrake">
+<meta name="twitter:description" content="A runaway agent loop is when an autonomous AI agent repeats actions — often the same tool call with identical arguments — without ever reaching its stoppin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you stop a runaway agent loop?","acceptedAnswer":{"@type":"Answer","text":"Detect identical repeated calls and enforce hard per-run limits (cost, steps, tool calls, duration) in-process, so the run halts before the next call. A tool like AgentBrake adds this in one line."}},{"@type":"Question","name":"Why are runaway loops so expensive?","acceptedAnswer":{"@type":"Answer","text":"Each loop iteration is a paid LLM call, and the failure is silent — there's no crash, so the run can continue for hours or days before anyone notices."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agentbrake.dev/"},{"@type":"ListItem","position":2,"name":"Glossary","item":"https://agentbrake.dev/glossary/"},{"@type":"ListItem","position":3,"name":"What is a runaway agent loop?","item":"https://agentbrake.dev/glossary/runaway-agent-loop/"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="/"><span class="dot"></span><span>AgentBrake</span></a>
+  <nav>
+    <a href="/langchain/">LangChain</a>
+    <a href="/crewai/">CrewAI</a>
+    <a href="/#how">How it works</a>
+    <a href="/glossary/runaway-agent-loop/">Glossary</a>
+    <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+  </nav>
+</div></header>
+<main>
+<div class="wrap crumbs"><a href="/">Home</a> / Glossary / What is a runaway agent loop?</div>
+<section class="hero" style="padding-top:36px"><div class="wrap">
+  <h1>What is a runaway agent loop?</h1>
+  <div class="answer">A runaway agent loop is when an autonomous AI agent repeats actions — often the same tool call with identical arguments — without ever reaching its stopping condition. Because each step makes a paid LLM call, the loop quietly accumulates cost until something external stops it.</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <p>Runaway loops are the most expensive failure mode of autonomous agents
+        because they fail quietly. A documented LangChain case ran four agents in a loop
+        for 11 days and cost $47,000 before anyone noticed.</p>
+        <h3>Common shapes</h3>
+        <ul><li>The same tool called thousands of times with identical arguments.</li>
+        <li>A reasoning loop that never satisfies its stop condition.</li>
+        <li>A planner that fans one task out into ever more subagent calls.</li></ul>
+        <h3>How to prevent one</h3>
+        <p>Put a hard, per-run limit in the agent process: detect identical-call repeats,
+        cap total steps and tool calls, set a wall-clock ceiling, and enforce a maximum
+        spend per run. <a href="/">AgentBrake</a> does exactly this in one line.</p>
+  <h2>Related</h2><div class="related"><a href="/glossary/llm-agent-cost-control/">LLM agent cost control</a><a href="/glossary/ai-agent-guardrails/">AI agent guardrails</a><a href="/langchain/">Stop runaway LangChain agents</a></div>
+</div></section>
+<div class="wrap"><div class="cta-band">
+      <h2>Stop your next runaway agent</h2>
+      <p class="muted" style="max-width:46ch;margin:0 auto 22px">One line of code. Open
+      source. Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
+      <div class="install" style="margin:0 auto 16px">
+        <span class="prompt mono">$</span><code class="mono">pip install agentbrake-sdk</code>
+        <button class="copy" data-copy="pip install agentbrake-sdk">copy</button>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+    </div></div>
+<div class="wrap"><section class="section"><h2>Frequently asked questions</h2><dl class="faq"><dt>How do you stop a runaway agent loop?</dt><dd>Detect identical repeated calls and enforce hard per-run limits (cost, steps, tool calls, duration) in-process, so the run halts before the next call. A tool like AgentBrake adds this in one line.</dd><dt>Why are runaway loops so expensive?</dt><dd>Each loop iteration is a paid LLM call, and the failure is silent — there's no crash, so the run can continue for hours or days before anyone notices.</dd></dl></section></div>
+
+</main>
+<footer class="site"><div class="wrap">
+  <div class="fcols">
+    <div>
+      <h4>AgentBrake</h4>
+      <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+    </div>
+    <div><h4>Product</h4>
+      <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
+      <a href="/#what">What it catches</a><a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a></div>
+    <div><h4>Compare</h4>
+      <a href="/vs/langfuse/">vs Langfuse</a><a href="/vs/helicone/">vs Helicone</a>
+      <a href="/vs/langsmith/">vs LangSmith</a><a href="/vs/galileo/">vs Galileo</a></div>
+    <div><h4>Learn</h4>
+      <a href="/glossary/runaway-agent-loop/">Runaway agent loop</a>
+      <a href="/glossary/llm-agent-cost-control/">Agent cost control</a>
+      <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
+      <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+    <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a> ·
+    <a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a> · <code>pip install agentbrake-sdk</code></div>
+</div></footer>
+<script src="/copy.js" defer></script>
+</body>
+</html>

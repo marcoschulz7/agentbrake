@@ -1,0 +1,29 @@
+# AgentBrake
+
+> The emergency brake for multi-agent systems. AgentBrake is an open-source
+> (MIT) Python package that stops runaway LangChain and CrewAI agents in real
+> time — before infinite loops or cost blowouts burn your budget. Install:
+> `pip install agentbrake-sdk` (imports as `agentbrake`).
+
+## What it does
+- Detects identical-tool loops and halts the run before the next call.
+- Enforces a per-run cost ceiling from real token usage.
+- Caps total steps, tool calls, and wall-clock duration.
+- Runs in-process — it stops the agent, it does not just observe it.
+
+## Frameworks
+- LangChain 1.x (create_agent / LangGraph): LangChainBrakeMiddleware.
+- LangChain 0.x (AgentExecutor): LangChainBrake callback.
+- CrewAI 1.x: CrewAIBrake().install().
+
+## Key pages
+- Home: https://agentbrake.dev/
+- LangChain: https://agentbrake.dev/langchain/
+- CrewAI: https://agentbrake.dev/crewai/
+- Runaway agent loop (definition): https://agentbrake.dev/glossary/runaway-agent-loop/
+- LLM agent cost control: https://agentbrake.dev/glossary/llm-agent-cost-control/
+- Comparisons: https://agentbrake.dev/vs/langfuse/ , /vs/helicone/ , /vs/langsmith/ , /vs/galileo/
+
+## Source
+- GitHub: https://github.com/marcoschulz7/agentbrake
+- PyPI: https://pypi.org/project/agentbrake-sdk/

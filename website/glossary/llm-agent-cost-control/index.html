@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is LLM agent cost control? — definition & how to prevent it | AgentBrake</title>
+<meta name="description" content="LLM agent cost control is the practice of capping how much money a single AI agent run can spend. Unlike monthly provider spend caps, which are account-wid">
+<link rel="canonical" href="https://agentbrake.dev/glossary/llm-agent-cost-control/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is LLM agent cost control? — definition & how to prevent it | AgentBrake">
+<meta property="og:description" content="LLM agent cost control is the practice of capping how much money a single AI agent run can spend. Unlike monthly provider spend caps, which are account-wid">
+<meta property="og:url" content="https://agentbrake.dev/glossary/llm-agent-cost-control/">
+<meta property="og:image" content="https://agentbrake.dev/og.png">
+<meta property="og:site_name" content="AgentBrake">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What is LLM agent cost control? — definition & how to prevent it | AgentBrake">
+<meta name="twitter:description" content="LLM agent cost control is the practice of capping how much money a single AI agent run can spend. Unlike monthly provider spend caps, which are account-wid">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is per-run cost control different from a provider spend cap?","acceptedAnswer":{"@type":"Answer","text":"A provider cap is monthly and account-wide and fires after the damage. Per-run control stops this specific agent the moment it crosses a limit, before the next call."}},{"@type":"Question","name":"Can you cap cost inside the agent process?","acceptedAnswer":{"@type":"Answer","text":"Yes. AgentBrake tracks token spend live and raises a stop the instant a run exceeds your cost ceiling — no proxy required."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agentbrake.dev/"},{"@type":"ListItem","position":2,"name":"Glossary","item":"https://agentbrake.dev/glossary/"},{"@type":"ListItem","position":3,"name":"What is LLM agent cost control?","item":"https://agentbrake.dev/glossary/llm-agent-cost-control/"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="/"><span class="dot"></span><span>AgentBrake</span></a>
+  <nav>
+    <a href="/langchain/">LangChain</a>
+    <a href="/crewai/">CrewAI</a>
+    <a href="/#how">How it works</a>
+    <a href="/glossary/runaway-agent-loop/">Glossary</a>
+    <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+  </nav>
+</div></header>
+<main>
+<div class="wrap crumbs"><a href="/">Home</a> / Glossary / What is LLM agent cost control?</div>
+<section class="hero" style="padding-top:36px"><div class="wrap">
+  <h1>What is LLM agent cost control?</h1>
+  <div class="answer">LLM agent cost control is the practice of capping how much money a single AI agent run can spend. Unlike monthly provider spend caps, which are account-wide and fire after the fact, per-run control stops an individual agent in real time once it crosses a cost or loop limit.</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <p>Autonomous agents make many chained LLM calls, so cost is driven by runtime
+        behavior, not a fixed price. Effective cost control happens <em>per run</em> and
+        <em>in-process</em>.</p>
+        <h3>Levels of control</h3>
+        <table><thead><tr><th>Mechanism</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td>Provider monthly cap</td><td>After the spend, account-wide</td></tr>
+        <tr><td>Observability alert</td><td>After the spend, on a dashboard</td></tr>
+        <tr><td><strong>Per-run brake (AgentBrake)</strong></td><td><span class="yes">Before the next call, in real time</span></td></tr>
+        </tbody></table>
+        <p><a href="/">AgentBrake</a> enforces a live cost ceiling from real token usage and
+        stops the run the moment it's crossed.</p>
+  <h2>Related</h2><div class="related"><a href="/glossary/runaway-agent-loop/">Runaway agent loop</a><a href="/glossary/ai-agent-guardrails/">AI agent guardrails</a><a href="/vs/helicone/">AgentBrake vs Helicone</a></div>
+</div></section>
+<div class="wrap"><div class="cta-band">
+      <h2>Stop your next runaway agent</h2>
+      <p class="muted" style="max-width:46ch;margin:0 auto 22px">One line of code. Open
+      source. Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
+      <div class="install" style="margin:0 auto 16px">
+        <span class="prompt mono">$</span><code class="mono">pip install agentbrake-sdk</code>
+        <button class="copy" data-copy="pip install agentbrake-sdk">copy</button>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+    </div></div>
+<div class="wrap"><section class="section"><h2>Frequently asked questions</h2><dl class="faq"><dt>How is per-run cost control different from a provider spend cap?</dt><dd>A provider cap is monthly and account-wide and fires after the damage. Per-run control stops this specific agent the moment it crosses a limit, before the next call.</dd><dt>Can you cap cost inside the agent process?</dt><dd>Yes. AgentBrake tracks token spend live and raises a stop the instant a run exceeds your cost ceiling — no proxy required.</dd></dl></section></div>
+
+</main>
+<footer class="site"><div class="wrap">
+  <div class="fcols">
+    <div>
+      <h4>AgentBrake</h4>
+      <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+    </div>
+    <div><h4>Product</h4>
+      <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
+      <a href="/#what">What it catches</a><a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a></div>
+    <div><h4>Compare</h4>
+      <a href="/vs/langfuse/">vs Langfuse</a><a href="/vs/helicone/">vs Helicone</a>
+      <a href="/vs/langsmith/">vs LangSmith</a><a href="/vs/galileo/">vs Galileo</a></div>
+    <div><h4>Learn</h4>
+      <a href="/glossary/runaway-agent-loop/">Runaway agent loop</a>
+      <a href="/glossary/llm-agent-cost-control/">Agent cost control</a>
+      <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
+      <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+    <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a> ·
+    <a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a> · <code>pip install agentbrake-sdk</code></div>
+</div></footer>
+<script src="/copy.js" defer></script>
+</body>
+</html>

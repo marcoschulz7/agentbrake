@@ -10,3 +10,11 @@ venv/
 .DS_Store
 .pytest_cache/
 *.egg
+
+# node / next (landing site)
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts

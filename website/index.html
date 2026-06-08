@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentBrake — Stop runaway LangChain & CrewAI agents</title>
+<meta name="description" content="Open-source emergency brake for AI agents. Stop runaway LangChain & CrewAI loops and cost blowouts in real time, before the next expensive call. One line of code, MIT licensed.">
+<link rel="canonical" href="https://agentbrake.dev/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AgentBrake — Stop runaway LangChain & CrewAI agents">
+<meta property="og:description" content="Open-source emergency brake for AI agents. Stop runaway LangChain & CrewAI loops and cost blowouts in real time, before the next expensive call. One line of code, MIT licensed.">
+<meta property="og:url" content="https://agentbrake.dev/">
+<meta property="og:image" content="https://agentbrake.dev/og.png">
+<meta property="og:site_name" content="AgentBrake">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AgentBrake — Stop runaway LangChain & CrewAI agents">
+<meta name="twitter:description" content="Open-source emergency brake for AI agents. Stop runaway LangChain & CrewAI loops and cost blowouts in real time, before the next expensive call. One line of code, MIT licensed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AgentBrake","url":"https://agentbrake.dev","logo":"https://agentbrake.dev/og.png","sameAs":["https://github.com/marcoschulz7/agentbrake","https://pypi.org/project/agentbrake-sdk/"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AgentBrake","applicationCategory":"DeveloperApplication","operatingSystem":"Python 3.9+","description":"Real-time emergency brake that stops runaway LangChain and CrewAI agents before they cause cost blowouts.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"0.1.1","url":"https://agentbrake.dev","downloadUrl":"https://pypi.org/project/agentbrake-sdk/","license":"https://opensource.org/licenses/MIT"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is AgentBrake?","acceptedAnswer":{"@type":"Answer","text":"AgentBrake is an open-source Python package that stops runaway LangChain and CrewAI agents in real time. You set limits — cost ceiling, identical-tool-loop detection, max steps, tool calls, and duration — and it halts the run before the next expensive call goes out."}},{"@type":"Question","name":"How is it different from observability tools?","acceptedAnswer":{"@type":"Answer","text":"Observability tools like Langfuse, Helicone, and LangSmith record what an agent did. AgentBrake intercepts and stops it. It runs in-process and per-run, so it halts this agent now, before the next call — not after the bill arrives."}},{"@type":"Question","name":"Does it work with LangChain 1.x and CrewAI 1.x?","acceptedAnswer":{"@type":"Answer","text":"Yes. On LangChain 1.x (create_agent / LangGraph) it uses middleware that runs inside the agent graph, because callbacks can only observe a LangGraph run, not stop it. On CrewAI 1.x it patches the provider call path and uses a BaseException so the framework's retry loop can't swallow the brake."}},{"@type":"Question","name":"Is AgentBrake free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is MIT licensed and free for any use, including commercial. Install it with pip install agentbrake-sdk."}},{"@type":"Question","name":"How much code does it take?","acceptedAnswer":{"@type":"Answer","text":"One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="/"><span class="dot"></span><span>AgentBrake</span></a>
+  <nav>
+    <a href="/langchain/">LangChain</a>
+    <a href="/crewai/">CrewAI</a>
+    <a href="/#how">How it works</a>
+    <a href="/glossary/runaway-agent-loop/">Glossary</a>
+    <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+  </nav>
+</div></header>
+<main>
+
+<section class="hero"><div class="wrap">
+  <span class="eyebrow">Open source · LangChain &amp; CrewAI</span>
+  <h1>Stop runaway AI agents before they burn your budget.</h1>
+  <p class="lead">AgentBrake is the emergency brake for LangChain &amp; CrewAI. One line of
+  code stops infinite loops, cost blowouts, and endless reasoning — in real time,
+  before the next expensive call goes out.</p>
+  <div class="cta-row">
+    <div class="install">
+      <span class="prompt mono">$</span><code class="mono">pip install agentbrake-sdk</code>
+      <button class="copy" data-copy="pip install agentbrake-sdk">copy</button>
+    </div>
+    <a class="btn btn-ghost" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+  </div>
+  <p class="hero-note">Imports as <code class="mono">agentbrake</code>. MIT licensed.
+  Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
+  <figure>
+    <img src="/agentbrake.gif" width="1278" height="484" loading="eager"
+      alt="AgentBrake stopping a real LangChain (LangGraph) agent caught in a loop at step 3">
+    <figcaption>A real LangGraph agent caught in a loop — stopped at step 3, before the bill grows.</figcaption>
+  </figure>
+</div></section>
+
+<section class="section" id="problem"><div class="wrap">
+  <h2>Agents fail expensively, not loudly</h2>
+  <div class="answer">In November 2025, four LangChain agents entered an infinite loop.
+  They ran for 11 days. The bill was <strong>$47,000</strong>. Nobody noticed until it
+  was over.</div>
+  <p class="muted">This is not rare. An agent calls the same tool 14,000 times with
+  identical arguments. A planner expands one task into dozens of subagent calls. A
+  reasoning loop never hits its stopping condition and runs all night. Observability
+  tools record it. They don't stop it — and the gap between "the alert fired" and "the
+  run stopped" is exactly where the money goes.</p>
+</div></section>
+
+<section class="section" id="how"><div class="wrap">
+  <h2>How it works</h2>
+  <p class="lead">AgentBrake watches every step in real time. When a run crosses a limit
+  you set, it raises a clean exception that halts the agent before the next expensive
+  call goes out.</p>
+  <div class="grid" style="margin-bottom:8px">
+    <div class="card"><h3>LangChain</h3><pre><code class="mono"><span class="tok-k">from</span> agentbrake <span class="tok-k">import</span> LangChainBrakeMiddleware
+<span class="tok-k">from</span> langchain.agents <span class="tok-k">import</span> create_agent
+
+agent = <span class="tok-f">create_agent</span>(
+    model, tools=tools,
+    middleware=[<span class="tok-f">LangChainBrakeMiddleware</span>(max_cost_usd=<span class="tok-s">2.00</span>, repeat_tool_limit=<span class="tok-s">5</span>)],
+)</code></pre>
+      <p style="margin-top:12px"><a href="/langchain/">LangChain guide →</a></p></div>
+    <div class="card"><h3>CrewAI</h3><pre><code class="mono"><span class="tok-k">from</span> agentbrake <span class="tok-k">import</span> CrewAIBrake
+
+<span class="tok-c"># right before crew.kickoff()</span>
+<span class="tok-f">CrewAIBrake</span>(max_cost_usd=<span class="tok-s">3.00</span>, repeat_tool_limit=<span class="tok-s">5</span>).<span class="tok-f">install</span>()</code></pre>
+      <p style="margin-top:12px"><a href="/crewai/">CrewAI guide →</a></p></div>
+  </div>
+</div></section>
+
+<section class="section" id="what"><div class="wrap">
+  <h2>What it catches</h2>
+  <table>
+    <thead><tr><th>Runaway pattern</th><th>How AgentBrake stops it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Identical-tool loops</strong><br><span class="muted">same call, same args, over and over</span></td><td><code class="mono">repeat_tool_limit</code> — trips after N identical calls in a row</td></tr>
+      <tr><td><strong>Cost blowouts</strong><br><span class="muted">the $47k overnight run</span></td><td><code class="mono">max_cost_usd</code> — a hard ceiling, enforced live as tokens are spent</td></tr>
+      <tr><td><strong>Endless reasoning</strong><br><span class="muted">no stopping condition</span></td><td><code class="mono">max_steps</code> — caps total reasoning steps</td></tr>
+      <tr><td><strong>Tool-call storms</strong></td><td><code class="mono">max_tool_calls</code> — caps total tool invocations</td></tr>
+      <tr><td><strong>Hung runs</strong></td><td><code class="mono">max_duration_s</code> — wall-clock ceiling</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">It warns at 80% of any limit and stops at 100%.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>Why not just set a provider spend cap?</h2>
+  <div class="answer">Provider caps are monthly and account-wide — they fire after the
+  damage, across everything. AgentBrake is per-run and in-process: it stops this agent
+  now, before the next call. It's the difference between a smoke alarm and a sprinkler.</div>
+  <div class="related">
+    <a href="/vs/langfuse/">AgentBrake vs Langfuse</a>
+    <a href="/vs/helicone/">vs Helicone</a>
+    <a href="/vs/langsmith/">vs LangSmith</a>
+    <a href="/vs/galileo/">vs Galileo</a>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="cta-band">
+      <h2>Stop your next runaway agent</h2>
+      <p class="muted" style="max-width:46ch;margin:0 auto 22px">One line of code. Open
+      source. Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
+      <div class="install" style="margin:0 auto 16px">
+        <span class="prompt mono">$</span><code class="mono">pip install agentbrake-sdk</code>
+        <button class="copy" data-copy="pip install agentbrake-sdk">copy</button>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+    </div></div>
+<div class="wrap"><section class="section"><h2>Frequently asked questions</h2><dl class="faq"><dt>What is AgentBrake?</dt><dd>AgentBrake is an open-source Python package that stops runaway LangChain and CrewAI agents in real time. You set limits — cost ceiling, identical-tool-loop detection, max steps, tool calls, and duration — and it halts the run before the next expensive call goes out.</dd><dt>How is it different from observability tools?</dt><dd>Observability tools like Langfuse, Helicone, and LangSmith record what an agent did. AgentBrake intercepts and stops it. It runs in-process and per-run, so it halts this agent now, before the next call — not after the bill arrives.</dd><dt>Does it work with LangChain 1.x and CrewAI 1.x?</dt><dd>Yes. On LangChain 1.x (create_agent / LangGraph) it uses middleware that runs inside the agent graph, because callbacks can only observe a LangGraph run, not stop it. On CrewAI 1.x it patches the provider call path and uses a BaseException so the framework's retry loop can't swallow the brake.</dd><dt>Is AgentBrake free?</dt><dd>Yes, it is MIT licensed and free for any use, including commercial. Install it with pip install agentbrake-sdk.</dd><dt>How much code does it take?</dt><dd>One line. You add the middleware (LangChain) or call .install() (CrewAI). No refactor, no proxy, no account.</dd></dl></section></div>
+
+</main>
+<footer class="site"><div class="wrap">
+  <div class="fcols">
+    <div>
+      <h4>AgentBrake</h4>
+      <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+    </div>
+    <div><h4>Product</h4>
+      <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
+      <a href="/#what">What it catches</a><a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a></div>
+    <div><h4>Compare</h4>
+      <a href="/vs/langfuse/">vs Langfuse</a><a href="/vs/helicone/">vs Helicone</a>
+      <a href="/vs/langsmith/">vs LangSmith</a><a href="/vs/galileo/">vs Galileo</a></div>
+    <div><h4>Learn</h4>
+      <a href="/glossary/runaway-agent-loop/">Runaway agent loop</a>
+      <a href="/glossary/llm-agent-cost-control/">Agent cost control</a>
+      <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
+      <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+    <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a> ·
+    <a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a> · <code>pip install agentbrake-sdk</code></div>
+</div></footer>
+<script src="/copy.js" defer></script>
+</body>
+</html>

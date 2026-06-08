@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentBrake vs Galileo — stop agents vs observe them</title>
+<meta name="description" content="AgentBrake vs Galileo: Galileo is an LLM evaluation and observability platform; AgentBrake stops runaway agents in real time. See how they compare and when to use each.">
+<link rel="canonical" href="https://agentbrake.dev/vs/galileo/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AgentBrake vs Galileo — stop agents vs observe them">
+<meta property="og:description" content="AgentBrake vs Galileo: Galileo is an LLM evaluation and observability platform; AgentBrake stops runaway agents in real time. See how they compare and when to use each.">
+<meta property="og:url" content="https://agentbrake.dev/vs/galileo/">
+<meta property="og:image" content="https://agentbrake.dev/og.png">
+<meta property="og:site_name" content="AgentBrake">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AgentBrake vs Galileo — stop agents vs observe them">
+<meta name="twitter:description" content="AgentBrake vs Galileo: Galileo is an LLM evaluation and observability platform; AgentBrake stops runaway agents in real time. See how they compare and when to use each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is AgentBrake a guardrails tool?","acceptedAnswer":{"@type":"Answer","text":"It's a runtime cost-and-loop guardrail — a circuit breaker. It doesn't score output quality; it stops a run from running away."}},{"@type":"Question","name":"Can I combine it with an eval platform?","acceptedAnswer":{"@type":"Answer","text":"Yes. Evaluate quality with your eval platform; cap runaway cost and loops with AgentBrake."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agentbrake.dev/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://agentbrake.dev/vs/"},{"@type":"ListItem","position":3,"name":"vs Galileo","item":"https://agentbrake.dev/vs/galileo/"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="/"><span class="dot"></span><span>AgentBrake</span></a>
+  <nav>
+    <a href="/langchain/">LangChain</a>
+    <a href="/crewai/">CrewAI</a>
+    <a href="/#how">How it works</a>
+    <a href="/glossary/runaway-agent-loop/">Glossary</a>
+    <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+  </nav>
+</div></header>
+<main>
+<div class="wrap crumbs"><a href="/">Home</a> / Compare / vs Galileo</div>
+<section class="hero" style="padding-top:36px"><div class="wrap">
+  <h1>AgentBrake vs Galileo</h1>
+  <p class="lead">Galileo focuses on evaluation, monitoring and guardrail scoring of LLM output quality. AgentBrake focuses on one thing: stopping a runaway agent run before it spends more money.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>AgentBrake vs Galileo at a glance</h2>
+  <table>
+    <thead><tr><th></th><th>AgentBrake</th><th>Galileo</th></tr></thead>
+    <tbody><tr><td>Stops a runaway run in real time</td><td><span class="yes">Yes — in-process, per run</span></td><td><span class="no">No — evaluates &amp; monitors</span></td></tr><tr><td>Records / traces runs</td><td><span class="muted">Basic live stats</span></td><td><span class="yes">Yes — its core strength</span></td></tr><tr><td>Identical-loop detection that halts</td><td><span class="yes">Yes</span></td><td><span class="no">Observe only</span></td></tr><tr><td>Hard per-run cost ceiling that halts</td><td><span class="yes">Yes</span></td><td><span class="no">Alerts, not stops</span></td></tr><tr><td>Open source (MIT)</td><td><span class="yes">Yes</span></td><td>Varies</td></tr><tr><td>Setup</td><td><span class="yes">One line, no proxy</span></td><td>SDK / proxy / dashboard</td></tr><tr><td>Frameworks</td><td>LangChain 1.x &amp; 0.x, CrewAI 1.x</td><td>Many</td></tr></tbody>
+  </table>
+  <p class="muted">Galileo is an LLM evaluation and observability platform. The two are complementary, not mutually
+  exclusive — most teams keep their observability stack and add AgentBrake as the
+  control layer that actually stops a run.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>When to use which</h2>
+  <div class="answer">Use Galileo to measure and improve output quality and catch hallucinations. Use AgentBrake as the runtime circuit breaker that caps cost, loops and duration per run. Quality tooling and a kill-switch solve different risks.</div>
+  <div class="related">
+    <a href="/langchain/">AgentBrake for LangChain</a>
+    <a href="/crewai/">AgentBrake for CrewAI</a>
+    <a href="/glossary/llm-agent-cost-control/">LLM agent cost control</a>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="cta-band">
+      <h2>Stop your next runaway agent</h2>
+      <p class="muted" style="max-width:46ch;margin:0 auto 22px">One line of code. Open
+      source. Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
+      <div class="install" style="margin:0 auto 16px">
+        <span class="prompt mono">$</span><code class="mono">pip install agentbrake-sdk</code>
+        <button class="copy" data-copy="pip install agentbrake-sdk">copy</button>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/marcoschulz7/agentbrake" rel="noopener">Star on GitHub</a>
+    </div></div>
+<div class="wrap"><section class="section"><h2>Frequently asked questions</h2><dl class="faq"><dt>Is AgentBrake a guardrails tool?</dt><dd>It's a runtime cost-and-loop guardrail — a circuit breaker. It doesn't score output quality; it stops a run from running away.</dd><dt>Can I combine it with an eval platform?</dt><dd>Yes. Evaluate quality with your eval platform; cap runaway cost and loops with AgentBrake.</dd></dl></section></div>
+
+</main>
+<footer class="site"><div class="wrap">
+  <div class="fcols">
+    <div>
+      <h4>AgentBrake</h4>
+      <p class="muted" style="max-width:34ch">The emergency brake for multi-agent
+      systems. Stop runaway LangChain &amp; CrewAI agents in real time — open source, MIT.</p>
+    </div>
+    <div><h4>Product</h4>
+      <a href="/langchain/">LangChain</a><a href="/crewai/">CrewAI</a>
+      <a href="/#what">What it catches</a><a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a></div>
+    <div><h4>Compare</h4>
+      <a href="/vs/langfuse/">vs Langfuse</a><a href="/vs/helicone/">vs Helicone</a>
+      <a href="/vs/langsmith/">vs LangSmith</a><a href="/vs/galileo/">vs Galileo</a></div>
+    <div><h4>Learn</h4>
+      <a href="/glossary/runaway-agent-loop/">Runaway agent loop</a>
+      <a href="/glossary/llm-agent-cost-control/">Agent cost control</a>
+      <a href="/glossary/ai-agent-guardrails/">Agent guardrails</a>
+      <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="fbottom">© 2026 AgentBrake · MIT License ·
+    <a href="https://github.com/marcoschulz7/agentbrake" rel="noopener">GitHub</a> ·
+    <a href="https://pypi.org/project/agentbrake-sdk/" rel="noopener">PyPI</a> · <code>pip install agentbrake-sdk</code></div>
+</div></footer>
+<script src="/copy.js" defer></script>
+</body>
+</html>
