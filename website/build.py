@@ -344,9 +344,9 @@ def build_home():
   <p class="hero-note">Imports as <code class="mono">agentbrake</code>. Free, source-available (FSL).
   Works on LangChain 1.x, CrewAI 1.x, and the classic AgentExecutor.</p>
   <figure>
-    <img src="/agentbrake.gif" width="1278" height="484" loading="eager"
-      alt="AgentBrake stopping a real LangChain (LangGraph) agent caught in a loop at step 3">
-    <figcaption>A real LangGraph agent caught in a loop — stopped at step 3, before the bill grows.</figcaption>
+    <img src="/agentbrake.gif" width="1054" height="522" loading="eager"
+      alt="AgentBrake halting a runaway agent at a $2 cost ceiling as the running cost climbs">
+    <figcaption>A runaway agent racking up cost, stopped the moment it crosses your ceiling, before the bill grows.</figcaption>
   </figure>
 </div></section>
 

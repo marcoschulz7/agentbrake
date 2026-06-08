@@ -175,12 +175,12 @@ export default function Landing() {
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center"
+            className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center text-center"
           >
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-green-700">
-              Free, source available · Private by design · LangChain &amp; CrewAI
+            <span className="mb-6 inline-flex max-w-full items-center gap-2 whitespace-normal rounded-full border border-green-200 bg-green-50 px-3.5 py-1.5 text-center text-[11px] font-semibold uppercase text-green-700 sm:text-xs">
+              Free · Private by design
             </span>
-            <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-6xl">
+            <h1 className="text-balance text-[2rem] font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
               Stop runaway AI agents before they burn your budget.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-lg text-slate-600">
@@ -214,15 +214,15 @@ export default function Landing() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/agentbrake.gif"
-              width={1278}
-              height={484}
-              alt="AgentBrake stopping a real LangChain (LangGraph) agent caught in a loop at step 3"
+              width={1054}
+              height={522}
+              alt="AgentBrake halting a runaway agent at a $2 cost ceiling as the running cost climbs"
               className="w-full"
             />
           </motion.figure>
           <p className="mt-3 text-center text-sm text-slate-500">
-            A real LangGraph agent caught in a loop, stopped at step 3, before
-            the bill grows.
+            A runaway agent racking up cost, stopped the moment it crosses your
+            ceiling, before the bill grows.
           </p>
         </section>
 
@@ -263,7 +263,7 @@ export default function Landing() {
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               <motion.div
                 {...fade}
-                className="rounded-2xl border border-slate-200 bg-white p-1 shadow-sm"
+                className="min-w-0 rounded-2xl border border-slate-200 bg-white p-1 shadow-sm"
               >
                 <div className="flex items-center justify-between px-5 pt-4">
                   <span className="text-sm font-semibold text-slate-900">
@@ -291,7 +291,7 @@ agent = create_agent(
 
               <motion.div
                 {...fade}
-                className="rounded-2xl border border-slate-200 bg-white p-1 shadow-sm"
+                className="min-w-0 rounded-2xl border border-slate-200 bg-white p-1 shadow-sm"
               >
                 <div className="flex items-center justify-between px-5 pt-4">
                   <span className="text-sm font-semibold text-slate-900">

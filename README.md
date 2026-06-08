@@ -9,9 +9,9 @@ pip install agentbrake-sdk
 
 > The install name is `agentbrake-sdk`; you import it as `agentbrake`.
 
-![AgentBrake stopping a runaway LangGraph loop at step 3](demo/agentbrake.gif)
+![AgentBrake halting a runaway agent at a cost ceiling](demo/agentbrake.gif)
 
-*A real LangChain (LangGraph) agent caught in a loop — stopped at step 3, before the bill grows. [Run it yourself, no API key needed.](examples/langchain_quickstart.py)*
+*A runaway agent racking up cost, stopped the moment it crosses your ceiling, before the bill grows. There's also a [no-API-key example](examples/langchain_quickstart.py) that brakes a real LangGraph loop you can run yourself.*
 
 ---
 
