@@ -7,9 +7,10 @@ because (a) LangGraph swallows exceptions raised from callbacks, so a callback
 can watch a loop but can't stop it, and (b) CrewAI 1.x moved LLM calls behind a
 provider factory. Lead with the $47k story; back it with that technical truth.
 
-Status to state plainly everywhere: LangChain is demoed end-to-end (the no-API-key
-example brakes a real LangGraph loop); CrewAI's mechanics are verified against the
-real library, with a live-key run still to come. HN/Reddit reward that honesty.
+Status: both paths are verified end-to-end. LangChain — the no-API-key example
+brakes a real LangGraph loop. CrewAI — a live run on real OpenAI confirmed the
+brake halts crew.kickoff() (and tracks real tokens/cost). Still say plainly that
+it's early (v0.1.x); HN/Reddit reward that honesty.
 
 ---
 
@@ -49,10 +50,10 @@ snippets floating around were written against the old APIs and quietly no-op on
 the current versions. AgentBrake is built and tested against langchain 1.3 and
 crewai 1.14.
 
-Honest status: the LangChain path is demoed end-to-end (there's an example that
-brakes a real LangGraph loop with no API key). CrewAI's mechanics are verified
-against the real library; the live-key end-to-end run is the next thing on my
-list. MIT licensed.
+Honest status: both paths are verified end-to-end. There's an example that
+brakes a real LangGraph loop with no API key, and a live run on real OpenAI
+confirmed the brake halts a CrewAI crew.kickoff() while tracking real
+tokens/cost. It's early (v0.1.x) and MIT licensed.
 
 Repo: https://github.com/marcoschulz7/agentbrake
 PyPI: https://pypi.org/project/agentbrake-sdk/

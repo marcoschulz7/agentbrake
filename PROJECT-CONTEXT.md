@@ -76,20 +76,21 @@ darauf umgebaut: er patcht jetzt **jede Provider-Klasse mit eigenem `call()`**
   Längen-Schätzung zurück.
 - `install()` muss **nach** dem Bauen der Agenten/LLMs laufen (CrewAI lädt
   Provider lazy) — am besten direkt vor `crew.kickoff()`.
-- Noch offen: ein echter End-to-End-Lauf mit live LLM-Key (kostet echtes Geld).
-  Patch-Punkte + Token-Buchhaltung sind aber gegen die reale Lib verifiziert.
+- **Live verifiziert (0.1.1):** ein echter Crew-Lauf gegen OpenAI hat bestätigt,
+  dass die Bremse `crew.kickoff()` wirklich stoppt und echte Tokens/Kosten trackt.
+  Der Live-Lauf deckte auf, dass CrewAI Exceptions per `except Exception` schluckt
+  → `AgentBrakeError` ist jetzt eine `BaseException` (Kill-Switch), die kein
+  Framework-Handler fangen kann. Abgesichert durch einen Offline-`kickoff()`-Test.
 
 ## Die offenen nächsten Schritte (Priorität von oben)
 
-1. **Echter End-to-End-Lauf mit live LLM-Key** (kostet ein paar Cent): einmal
-   `crewai_quickstart.py` mit `OPENAI_API_KEY` laufen lassen und einen echten
-   Crew-Loop bremsen sehen. Letzter ungetesteter Pfad — Mechanik ist verifiziert,
-   nur der Live-Lauf fehlt. (LangChain ist via No-Key-Beispiel schon abgedeckt.)
-2. **Auf GitHub stellen.** Repo anlegen, Code pushen (LICENSE + .gitignore liegen bei).
-3. **Auf PyPI veröffentlichen.** `pip install build twine`, `python -m build`,
-   `twine upload dist/*`. Dann ist `pip install agentbrake-sdk` weltweit live.
-4. **Go-to-Market starten.** Siehe `GO-TO-MARKET.md` — der 47k-Loop ist die beste Story.
-5. **Landing Page bauen.** Siehe `WEBSITE-ARCHITECTURE.md`.
+1. **Launchen.** Alles steht (live auf PyPI 0.1.1 + GitHub, Demo-GIF, Launch-Texte
+   in `LAUNCH-POSTS.md`). Show HN posten (Di–Do ~17:00 dt.), dann r/LangChain +
+   X-Thread, und auf **jeden** Kommentar antworten. Das ist der nächste echte Schritt.
+2. **Go-to-Market vertiefen.** Siehe `GO-TO-MARKET.md` — Testimonials sammeln,
+   Erfahrungs-Post, Product Hunt (erst mit GitHub-Traktion).
+3. **Landing Page bauen.** Siehe `WEBSITE-ARCHITECTURE.md` — bewusst *nach* der
+   ersten Verbreitung.
 
 **Erledigt (Juni 2026):** Packaging zu echtem `src/agentbrake`-Paket umgebaut
 (`__init__.py`, Wheel baut, `pip install -e .` läuft) · Testsuite neu von Null
@@ -97,7 +98,10 @@ geschrieben · CrewAI-Adapter gegen echtes CrewAI 1.14.6 verifiziert und auf die
 neue Provider-Factory-Architektur repariert · LangChain-1.x-Lücke gefunden
 (Callbacks bremsen in LangGraph nicht mehr) und mit `LangChainBrakeMiddleware`
 geschlossen — bremst nachweislich einen echten LangGraph-Loop ohne API-Key ·
-Examples für beide Frameworks geschrieben.
+Examples für beide Frameworks · **live auf PyPI (`agentbrake-sdk`) + GitHub
+veröffentlicht** · Demo-GIF + Launch-Texte erstellt · **0.1.1:** Live-Lauf deckte
+auf, dass CrewAI die Bremse verschluckte → mit `BaseException`-Kill-Switch gefixt,
+end-to-end live gegen OpenAI verifiziert.
 
 ## Arbeitsweise mit Marco (für Claude in der neuen Session)
 
