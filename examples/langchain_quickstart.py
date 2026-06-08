@@ -9,7 +9,7 @@ run (and bill) forever.
 
 Run it:
 
-    pip install agentbrake[langchain] langchain
+    pip install agentbrake-sdk[langchain] langchain
     python examples/langchain_quickstart.py
 
 You should see a few "[AgentBrake] step N" lines, then a clean
@@ -31,7 +31,7 @@ try:
 except Exception as e:  # pragma: no cover
     raise SystemExit(
         "This example needs LangChain 1.x:\n"
-        "    pip install agentbrake[langchain] langchain\n"
+        "    pip install agentbrake-sdk[langchain] langchain\n"
         f"(import error: {e})"
     )
 

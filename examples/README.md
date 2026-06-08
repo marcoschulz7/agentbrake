@@ -8,7 +8,7 @@ Builds a real LangChain 1.x agent (`create_agent` / LangGraph) wired to a fake
 model that loops forever, and stops it with `LangChainBrakeMiddleware`.
 
 ```bash
-pip install agentbrake[langchain] langchain
+pip install agentbrake-sdk[langchain] langchain
 python examples/langchain_quickstart.py
 ```
 
@@ -30,7 +30,7 @@ A meaningful CrewAI run needs a real model, so this shows the production wiring
 and runs a tiny real crew.
 
 ```bash
-pip install agentbrake crewai
+pip install agentbrake-sdk crewai
 export OPENAI_API_KEY=sk-...
 python examples/crewai_quickstart.py
 ```

@@ -28,13 +28,13 @@ uvx twine check dist/*                # must say PASSED for both
 
 # dry run on TestPyPI (needs a TestPyPI token)
 uvx twine upload --repository testpypi dist/*
-pip install -i https://test.pypi.org/simple/ agentbrake   # smoke-test the install
+pip install -i https://test.pypi.org/simple/ agentbrake-sdk   # smoke-test the install
 
 # the real thing (needs a PyPI token)
 uvx twine upload dist/*
 ```
 
-After this, `pip install agentbrake` is live worldwide.
+After this, `pip install agentbrake-sdk` is live worldwide.
 
 ## 3. Tag the release
 

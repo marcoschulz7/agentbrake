@@ -60,7 +60,7 @@ Homepage (/)                          ← Tag 1: nur diese Seite
 One line of code stops infinite loops, cost blowouts, and endless reasoning —
 in real time, before the next expensive call goes out."
 
-**Primärer Button:** `pip install agentbrake` (zum Kopieren)
+**Primärer Button:** `pip install agentbrake-sdk` (zum Kopieren)
 **Sekundärer Button:** „Star on GitHub ⭐"
 
 ---

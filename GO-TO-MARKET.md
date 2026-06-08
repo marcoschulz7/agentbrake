@@ -28,7 +28,7 @@ verkauft das Produkt in einem Satz. Nutze sie überall.
 2. **GitHub-Repo anlegen.** Code pushen. README ist schon launch-fertig.
    - Repo-Beschreibung: „The emergency brake for multi-agent systems. Stop runaway LangChain & CrewAI agents before they burn your budget."
    - Topics/Tags: `langchain`, `crewai`, `ai-agents`, `llm`, `cost-control`, `guardrails`, `finops`
-3. **Auf PyPI veröffentlichen.** Dann ist `pip install agentbrake` weltweit live.
+3. **Auf PyPI veröffentlichen.** Dann ist `pip install agentbrake-sdk` weltweit live.
 4. **Kurzes Demo-GIF/Video aufnehmen** (30-60 Sek): Terminal zeigt einen Loop,
    die Kosten laufen hoch, AgentBrake schlägt zu. Das ist dein wichtigstes Asset —
    es zeigt den „Aha"-Moment in Sekunden.
@@ -97,7 +97,7 @@ geworden bist, nicht weil du danach gefragt hast.
 
 ## Die wichtigsten 3 Dinge, falls du nur Zeit für 3 hast
 
-1. `pip install agentbrake` live bringen (GitHub + PyPI).
+1. `pip install agentbrake-sdk` live bringen (GitHub + PyPI).
 2. Das Demo-GIF mit der 47k-Story auf Hacker News + r/LangChain posten.
 3. Auf jeden einzelnen Kommentar antworten und Feedback einbauen.
 

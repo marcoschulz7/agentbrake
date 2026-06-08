@@ -87,7 +87,7 @@ darauf umgebaut: er patcht jetzt **jede Provider-Klasse mit eigenem `call()`**
    nur der Live-Lauf fehlt. (LangChain ist via No-Key-Beispiel schon abgedeckt.)
 2. **Auf GitHub stellen.** Repo anlegen, Code pushen (LICENSE + .gitignore liegen bei).
 3. **Auf PyPI veröffentlichen.** `pip install build twine`, `python -m build`,
-   `twine upload dist/*`. Dann ist `pip install agentbrake` weltweit live.
+   `twine upload dist/*`. Dann ist `pip install agentbrake-sdk` weltweit live.
 4. **Go-to-Market starten.** Siehe `GO-TO-MARKET.md` — der 47k-Loop ist die beste Story.
 5. **Landing Page bauen.** Siehe `WEBSITE-ARCHITECTURE.md`.
 

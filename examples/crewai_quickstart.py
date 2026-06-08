@@ -8,7 +8,7 @@ tests/test_crewai.py — including the loop detector and the cost ceiling.
 
 Run it (costs a few cents of real tokens):
 
-    pip install agentbrake crewai
+    pip install agentbrake-sdk crewai
     export OPENAI_API_KEY=sk-...
     python examples/crewai_quickstart.py
 
@@ -28,7 +28,7 @@ try:
 except Exception as e:  # pragma: no cover
     raise SystemExit(
         "This example needs CrewAI:\n"
-        "    pip install agentbrake crewai\n"
+        "    pip install agentbrake-sdk crewai\n"
         f"(import error: {e})"
     )
 

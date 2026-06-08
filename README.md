@@ -4,8 +4,10 @@
 Stop runaway LangChain & CrewAI agents in real time — *before* 50 cents turns into $47,000.
 
 ```bash
-pip install agentbrake
+pip install agentbrake-sdk
 ```
+
+> The install name is `agentbrake-sdk`; you import it as `agentbrake`.
 
 ---
 

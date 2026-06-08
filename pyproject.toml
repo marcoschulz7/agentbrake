@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "agentbrake"
+name = "agentbrake-sdk"
 version = "0.1.0"
 description = "The emergency brake for multi-agent systems. Stop runaway LangChain & CrewAI agents in real time — before 50 cents becomes $47,000."
 readme = "README.md"
