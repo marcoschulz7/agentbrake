@@ -193,6 +193,7 @@ class LangChainBrakeMiddleware(AgentMiddleware):
     def wrap_tool_call(self, request: Any, handler: Any) -> Any:
         """Runs before each tool executes. We check *first*, so the brake stops
         the run before the next (possibly expensive) tool call goes out."""
+        self.engine.check()  # re-raise immediately if already stopped
         name, args = self._tool_call_fields(request)
         self.engine.record_step()
         self.engine.record_tool(name, args)

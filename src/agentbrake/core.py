@@ -17,8 +17,17 @@ from dataclasses import dataclass, field
 from typing import Callable, Optional
 
 
-class AgentBrakeError(Exception):
-    """Raised when AgentBrake stops an agent. Catch this to handle a stop gracefully."""
+class AgentBrakeError(BaseException):
+    """Raised when AgentBrake stops an agent. Catch this to handle a stop gracefully.
+
+    Deliberately a *BaseException*, not Exception — like KeyboardInterrupt and
+    SystemExit. Agent frameworks (CrewAI's task executor, LangChain's tool
+    nodes) wrap execution in broad ``except Exception`` retry loops; if the brake
+    were a normal Exception, those loops would swallow it and the run would keep
+    going (and keep spending). As a BaseException it sails straight past
+    ``except Exception`` and actually halts the run. User code still catches it
+    explicitly with ``except AgentBrakeError``.
+    """
 
     def __init__(self, reason: str, stats: "RunStats"):
         self.reason = reason
@@ -153,9 +162,14 @@ class BrakeEngine:
     # --- the brake ------------------------------------------------------------
 
     def check(self) -> None:
-        """Evaluate all thresholds. Warn near limits, raise at limits."""
+        """Evaluate all thresholds. Warn near limits, raise at limits.
+
+        Once the brake has engaged, *every* subsequent check re-raises. This is
+        what makes it a real kill-switch: if a framework swallowed the first
+        AgentBrakeError and retried (CrewAI and others do exactly this), the next
+        check stops it again — before any further work or spend."""
         if self.stats.stopped:
-            return
+            raise AgentBrakeError(self.stats.stop_reason or "stopped", self.stats)
 
         c = self.config
         self._maybe_warn("cost", self.stats.cost_usd, c.max_cost_usd)

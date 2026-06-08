@@ -92,6 +92,8 @@ class CrewAIBrake:
         self._orig_tool_use = ToolUsage._use
 
         def _patched_use(self_tu, *args, **kwargs):
+            # Guard FIRST: re-raise before running another tool if already stopped.
+            engine.check()
             # Signature-agnostic: CrewAI 1.x calls _use(tool_string=, tool=,
             # calling=) by keyword, but argument order has shifted between
             # versions. Pull what we need from either kwargs or positional args
@@ -123,6 +125,10 @@ class CrewAIBrake:
         # is never recorded twice.
         def _make_llm_wrapper(orig):
             def _patched_call(self_llm, *args, **kwargs):
+                # Guard FIRST: if the brake already engaged (e.g. CrewAI caught
+                # the last AgentBrakeError and retried), refuse to make another
+                # paid call — re-raise before spending a cent.
+                engine.check()
                 result = CrewAIBrake._call_original(orig, self_llm, *args, **kwargs)
                 model = getattr(self_llm, "model", "") or ""
                 in_tok, out_tok = self._extract_call_tokens(self_llm)

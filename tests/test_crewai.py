@@ -129,3 +129,44 @@ def test_context_manager_installs_and_restores():
     with CrewAIBrake(verbose=False):
         assert ToolUsage._use is not orig_use
     assert ToolUsage._use is orig_use
+
+
+def test_brake_actually_halts_a_real_crew_kickoff():
+    # The regression that a live run exposed: CrewAI wraps execution in
+    # `except Exception` retries and swallowed the brake, so crew.kickoff()
+    # finished anyway. With AgentBrakeError as a BaseException + a guard that
+    # refuses to spend after stopping, kickoff() must now raise out cleanly.
+    # Runs fully offline via a fake LLM — no network, no API key.
+    from crewai import Agent, Crew, Task
+    from crewai.llms.base_llm import BaseLLM
+
+    class FakeLLM(BaseLLM):
+        def __init__(self):
+            super().__init__(model="fake-model")
+
+        def call(self, messages, tools=None, callbacks=None,
+                 available_functions=None, **kwargs):
+            return "Final Answer: a loop that repeats forever."
+
+        def supports_function_calling(self):
+            return False
+
+        def supports_stop_words(self):
+            return False
+
+        def get_context_window_size(self):
+            return 8192
+
+    agent = Agent(role="A", goal="answer", backstory="b",
+                  llm=FakeLLM(), verbose=False, max_iter=3)
+    task = Task(description="define a runaway loop", expected_output="one sentence",
+                agent=agent)
+    crew = Crew(agents=[agent], tasks=[task], verbose=False)
+
+    brake = CrewAIBrake(max_cost_usd=0.0000001, verbose=False)
+    brake.install()
+    try:
+        with pytest.raises(AgentBrakeError):
+            crew.kickoff()
+    finally:
+        brake.uninstall()

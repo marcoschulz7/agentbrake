@@ -3,7 +3,22 @@
 All notable changes to AgentBrake are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-## [0.1.0] — unreleased
+## [0.1.1]
+
+### Fixed
+- **The brake now actually halts CrewAI runs.** A live end-to-end run revealed
+  that CrewAI's task executor wraps execution in `except Exception` retry loops
+  and swallowed the brake, so the crew finished anyway. `AgentBrakeError` is now
+  a **BaseException** (like `KeyboardInterrupt`), so framework `except Exception`
+  handlers can't catch it. User code still catches it via `except AgentBrakeError`.
+- **No spend after stopping.** Once engaged, every `check()` re-raises and the
+  CrewAI / LangChain wrappers re-check *before* making another model or tool
+  call — so a swallow-and-retry can't burn another cent.
+
+### Verified
+- Live: token accounting against real OpenAI via CrewAI (real tokens + cost).
+
+## [0.1.0]
 
 First public release.
 

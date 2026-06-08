@@ -185,11 +185,35 @@ def test_stats_summary_is_human_readable():
     assert "llm_calls=1" in s
 
 
-def test_check_is_a_noop_after_stop():
+def test_check_keeps_raising_after_stop():
+    # Kill-switch semantics: once engaged, every check() re-raises. This is what
+    # stops a framework that swallowed the first error and retried.
     eng = BrakeEngine(_only(max_steps=1))
     with pytest.raises(AgentBrakeError):
         eng.record_step()
         eng.check()
-    # already stopped -> calling check again must not raise again
-    eng.check()
+    with pytest.raises(AgentBrakeError):
+        eng.check()  # still raises, every time
     assert eng.stats.stopped is True
+
+
+def test_brake_is_not_swallowed_by_except_exception():
+    # Regression for the live CrewAI finding: CrewAI (and other agent runtimes)
+    # wrap execution in `except Exception` retry loops. AgentBrakeError must sail
+    # past those — it's a BaseException — or the run never actually stops.
+    assert issubclass(AgentBrakeError, BaseException)
+    assert not issubclass(AgentBrakeError, Exception)
+
+    eng = BrakeEngine(_only(repeat_tool_limit=2))
+    escaped = False
+    try:
+        for _ in range(5):
+            eng.record_tool("t", "x")
+            try:
+                eng.check()
+            except Exception:  # noqa: BLE001 - simulating a framework retry loop
+                # a normal Exception handler must NOT catch the brake
+                pass
+    except AgentBrakeError:
+        escaped = True
+    assert escaped, "AgentBrakeError was swallowed by `except Exception`"
